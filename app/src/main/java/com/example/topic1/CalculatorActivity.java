@@ -14,6 +14,7 @@ public class CalculatorActivity extends AppCompatActivity {
     Button btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn0,btnAdd,btnMinus,btnMultiply,btnDivide,
             btnDecimal,btnTotal;
     Integer result=0;
+    public  int id=0;
 
     public int one,two;
 
@@ -48,13 +49,26 @@ public class CalculatorActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                id=1;
                 one=Integer.parseInt(etTextbox.getText().toString());
                 Toast.makeText(CalculatorActivity.this, "One is"+one, Toast.LENGTH_SHORT).show();
                 etTextbox.getText().clear();
+            }
+        });
 
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id=2;
+                one=Integer.parseInt(etTextbox.getText().toString());
+                etTextbox.getText().clear();
+            }
+        });
 
-
+        btnDecimal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etTextbox.getText().clear();
             }
         });
 
@@ -62,8 +76,20 @@ public class CalculatorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+
                 two=Integer.parseInt(etTextbox.getText().toString());
-                add();
+
+                Arithmetic arithmetic=new Arithmetic(one,two);
+                if(id==1)
+                {
+                    etTextbox.setText(String.valueOf(arithmetic.add()));
+                }
+
+                else if (id==2)
+                {
+                    minus();
+                }
                 Toast.makeText(CalculatorActivity.this, "One is"+two, Toast.LENGTH_SHORT).show();
 
             }
@@ -84,13 +110,71 @@ public class CalculatorActivity extends AppCompatActivity {
             }
         });
 
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etTextbox.setText(etTextbox.getText().toString()+"3");
+            }
+        });
 
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etTextbox.setText(etTextbox.getText().toString()+"4");
+            }
+        });
 
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etTextbox.setText(etTextbox.getText().toString()+"5");
+            }
+        });
 
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etTextbox.setText(etTextbox.getText().toString()+"6");
+            }
+        });
+
+        btn7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etTextbox.setText(etTextbox.getText().toString()+"7");
+            }
+        });
+
+        btn8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etTextbox.setText(etTextbox.getText().toString()+"8");
+            }
+        });
+
+        btn9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etTextbox.setText(etTextbox.getText().toString()+"9");
+            }
+        });
+
+        btn0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                etTextbox.setText(etTextbox.getText().toString()+"0");
+            }
+        });
     }
-    public void add()
+    /*public void add()
     {
        result=one+two;
        etTextbox.setText(String.valueOf(result));
+    }*/
+
+    public void minus()
+    {
+        result=one-two;
+        etTextbox.setText(String.valueOf(result));
     }
 }
