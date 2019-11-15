@@ -3,9 +3,11 @@ package com.example.topic1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class CalculatorActivity extends AppCompatActivity {
@@ -13,6 +15,7 @@ public class CalculatorActivity extends AppCompatActivity {
     EditText etTextbox;
     Button btn1,btn2,btn3,btn4,btn5,btn6,btn7,btn8,btn9,btn0,btnAdd,btnMinus,btnMultiply,btnDivide,
             btnDecimal,btnTotal;
+    TextView tvHistory;
     Integer result=0;
     public  int id=0;
 
@@ -44,6 +47,8 @@ public class CalculatorActivity extends AppCompatActivity {
         btnDivide=findViewById(R.id.btnDivide);
         btnTotal=findViewById(R.id.btnTotal);
 
+        tvHistory=findViewById(R.id.tvHistory);
+
 
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +56,12 @@ public class CalculatorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 id=1;
                 one=Integer.parseInt(etTextbox.getText().toString());
-                Toast.makeText(CalculatorActivity.this, "One is"+one, Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(etTextbox.getText()))
+                {
+                    etTextbox.setError("Your message");
+                    return;
+                }
+                tvHistory.setText(one+" +");
                 etTextbox.getText().clear();
             }
         });
@@ -61,6 +71,27 @@ public class CalculatorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 id=2;
                 one=Integer.parseInt(etTextbox.getText().toString());
+                tvHistory.setText(one+" - ");
+                etTextbox.getText().clear();
+            }
+        });
+
+        btnMultiply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id=3;
+                one=Integer.parseInt(etTextbox.getText().toString());
+                tvHistory.setText(one+" * ");
+                etTextbox.getText().clear();
+            }
+        });
+
+        btnDivide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id=4;
+                one=Integer.parseInt(etTextbox.getText().toString());
+                tvHistory.setText(one+" / ");
                 etTextbox.getText().clear();
             }
         });
@@ -69,6 +100,7 @@ public class CalculatorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 etTextbox.getText().clear();
+                tvHistory.setText("");
             }
         });
 
@@ -76,19 +108,31 @@ public class CalculatorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-
                 two=Integer.parseInt(etTextbox.getText().toString());
 
                 Arithmetic arithmetic=new Arithmetic(one,two);
                 if(id==1)
                 {
+                    tvHistory.setText(arithmetic.displayAdd());
                     etTextbox.setText(String.valueOf(arithmetic.add()));
                 }
 
                 else if (id==2)
                 {
-                    minus();
+                    tvHistory.setText(arithmetic.displaySub());
+                    etTextbox.setText(String.valueOf(arithmetic.sub()));
+                }
+
+                else if (id==3)
+                {
+                    tvHistory.setText(arithmetic.displayMultiply());
+                    etTextbox.setText(String.valueOf(arithmetic.multiply()));
+                }
+
+                else if (id==4)
+                {
+                    tvHistory.setText(arithmetic.displayDivide());
+                    etTextbox.setText(String.valueOf(arithmetic.divide()));
                 }
                 Toast.makeText(CalculatorActivity.this, "One is"+two, Toast.LENGTH_SHORT).show();
 
@@ -166,15 +210,5 @@ public class CalculatorActivity extends AppCompatActivity {
             }
         });
     }
-    /*public void add()
-    {
-       result=one+two;
-       etTextbox.setText(String.valueOf(result));
-    }*/
 
-    public void minus()
-    {
-        result=one-two;
-        etTextbox.setText(String.valueOf(result));
-    }
 }

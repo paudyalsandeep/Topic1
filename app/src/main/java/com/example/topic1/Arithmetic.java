@@ -19,11 +19,31 @@ public class Arithmetic {
     }
 
     public int multiply() {
-        return first - second;
+        return first * second;
     }
 
     public int divide() {
-        return first - second;
+        return first / second;
+    }
+
+    public String displayAdd()
+    {
+        return first + "+" + second;
+    }
+
+    public String displaySub()
+    {
+        return first + "-" + second;
+    }
+
+    public String displayMultiply()
+    {
+        return first + "*" + second;
+    }
+
+    public String displayDivide()
+    {
+        return first + "/" + second;
     }
 
 }
