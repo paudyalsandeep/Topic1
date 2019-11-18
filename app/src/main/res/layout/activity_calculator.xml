@@ -162,8 +162,6 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:text="0"
-            android:backgroundTint="@android:color/holo_blue_light"
-            android:textColor="@android:color/background_light"
             android:textSize="50dp" />
 
         <Button
